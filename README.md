@@ -1,8 +1,8 @@
 ---
 title: Code Llama - Playground
-emoji: 🦙
+emoji: 🦙💻🦙
 colorFrom: blue
-colorTo: white
+colorTo: indigo
 sdk: gradio
 sdk_version: 3.28.3
 app_file: app.py
