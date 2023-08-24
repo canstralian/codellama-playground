@@ -1,8 +1,8 @@
 ---
-title: BigCode - Playground
-emoji: 🪐
-colorFrom: grey
-colorTo: yellow
+title: Code Llama - Playground
+emoji: 🦙
+colorFrom: blue
+colorTo: white
 sdk: gradio
 sdk_version: 3.28.3
 app_file: app.py
