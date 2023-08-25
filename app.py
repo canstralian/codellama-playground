@@ -15,7 +15,7 @@ API_URL = "https://api-inference.huggingface.co/models/codellama/CodeLlama-7b-hf
 
 FIM_PREFIX = "<PRE> "
 FIM_MIDDLE = " <MID>"
-FIM_SUFFIX = "<SUF>"
+FIM_SUFFIX = " <SUF>"
 
 FIM_INDICATOR = "<FILL_HERE>"
 
