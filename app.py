@@ -11,9 +11,7 @@ from share_btn import community_icon_html, loading_icon_html, share_js, share_bt
 
 HF_TOKEN = os.environ.get("HF_TOKEN", None)
 
-API_URL = "https://api-inference.huggingface.co/models/bigcode/starcoder"
-API_URL_BASE ="https://api-inference.huggingface.co/models/bigcode/starcoderbase"
-API_URL_PLUS = "https://api-inference.huggingface.co/models/bigcode/starcoderplus"
+API_URL = "https://api-inference.huggingface.co/models/codellama/CodeLlama-7b-hf"
 
 FIM_PREFIX = "<fim_prefix>"
 FIM_MIDDLE = "<fim_middle>"
@@ -21,46 +19,6 @@ FIM_SUFFIX = "<fim_suffix>"
 
 FIM_INDICATOR = "<FILL_HERE>"
 
-FORMATS = """## Model Formats
-
-The model is pretrained on code and is formatted with special tokens in addition to the pure code data,\
-such as prefixes specifying the source of the file or tokens separating code from a commit message.\
-Use these templates to explore the model's capacities:
-
-### 1. Prefixes 🏷️
-For pure code files, use any combination of the following prefixes:
-
-```
-<reponame>REPONAME<filename>FILENAME<gh_stars>STARS\ncode<|endoftext|>
-```
-STARS can be one of: 0, 1-10, 10-100, 100-1000, 1000+
-
-### 2. Commits 💾
-The commits data is formatted as follows:
-
-```
-<commit_before>code<commit_msg>text<commit_after>code<|endoftext|>
-```
-
-### 3. Jupyter Notebooks 📓
-The model is trained on Jupyter notebooks as Python scripts and structured formats like:
-
-```
-<start_jupyter><jupyter_text>text<jupyter_code>code<jupyter_output>output<jupyter_text>
-```
-
-### 4. Issues 🐛
-We also trained on GitHub issues using the following formatting:
-```
-<issue_start><issue_comment>text<issue_comment>...<issue_closed>
-```
-
-### 5. Fill-in-the-middle 🧩
-Fill in the middle requires rearranging the model inputs. The playground handles this for you - all you need is to specify where to fill:
-```
-code before<FILL_HERE>code after
-```
-"""
 
 theme = gr.themes.Monochrome(
     primary_hue="indigo",
@@ -87,7 +45,7 @@ client_plus = Client(
 )
 
 def generate(
-    prompt, temperature=0.9, max_new_tokens=256, top_p=0.95, repetition_penalty=1.0, version="StarCoder",
+    prompt, temperature=0.9, max_new_tokens=256, top_p=0.95, repetition_penalty=1.0,
 ):
 
     temperature = float(temperature)
@@ -113,12 +71,9 @@ def generate(
             raise ValueError(f"Only one {FIM_INDICATOR} allowed in prompt!")
         prompt = f"{FIM_PREFIX}{prefix}{FIM_SUFFIX}{suffix}{FIM_MIDDLE}"
 
-    if version == "StarCoder":
-        stream = client.generate_stream(prompt, **generate_kwargs)
-    elif version == "StarCoderPlus":
-        stream = client_plus.generate_stream(prompt, **generate_kwargs)
-    else:
-        stream = client_base.generate_stream(prompt, **generate_kwargs)
+    
+    stream = client.generate_stream(prompt, **generate_kwargs)
+    
 
     if fim_mode:
         output = prefix
@@ -164,34 +119,19 @@ monospace_css = """
 
 css += share_btn_css + monospace_css + ".gradio-container {color: black}"
 
-
 description = """
 <div style="text-align: center;">
-    <h1> ⭐ StarCoder <span style='color: #e6b800;'>Models</span> Playground</h1>
+    <h1> 🦙 CodeLlama Playground</h1>
 </div>
 <div style="text-align: left;">
-    <p>This is a demo to generate text and code with the following StarCoder models:</p>
-    <ul>
-        <li><a href="https://huggingface.co/bigcode/starcoderplus" style='color: #e6b800;'>StarCoderPlus</a>: A finetuned version of StarCoderBase on English web data, making it strong in both English text and code generation.</li>
-        <li><a href="https://huggingface.co/bigcode/starcoderbase" style='color: #e6b800;'>StarCoderBase</a>: A code generation model trained on 80+ programming languages, providing broad language coverage for code generation tasks.</li>
-        <li><a href="https://huggingface.co/bigcode/starcoder" style='color: #e6b800;'>StarCoder</a>: A finetuned version of StarCoderBase specifically focused on Python, while also maintaining strong performance on other programming languages.</li>
-    </ul>
-    <p><b>Please note:</b> These models are not designed for instruction purposes. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/spaces/HuggingFaceH4/starchat-playground">StarChat Playground</a>.</p>
+    <p>This is a demo to generate text and code with the following Code Llama model (7B).</p>
+    <p><b>Please note:</b> This model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model.</p>
 </div>
 """
-disclaimer = """⚠️<b>Any use or sharing of this demo constitues your acceptance of the BigCode [OpenRAIL-M](https://huggingface.co/spaces/bigcode/bigcode-model-license-agreement) License Agreement and the use restrictions included within.</b>\
- <br>**Intended Use**: this app and its [supporting model](https://huggingface.co/bigcode) are provided for demonstration purposes; not to serve as replacement for human expertise. For more details on the model's limitations in terms of factuality and biases, see the [model card.](hf.co/bigcode)"""
 
 with gr.Blocks(theme=theme, analytics_enabled=False, css=css) as demo:
     with gr.Column():
         gr.Markdown(description)
-        with gr.Row():
-            version = gr.Dropdown(
-                        ["StarCoderPlus", "StarCoderBase", "StarCoder"],
-                        value="StarCoder",
-                        label="Model",
-                        info="Choose a model from the list",
-                        )
         with gr.Row():
             with gr.Column():
                 instruction = gr.Textbox(
@@ -246,7 +186,6 @@ with gr.Blocks(theme=theme, analytics_enabled=False, css=css) as demo:
                                         info="Penalize repeated tokens",
                                     )
                                     
-                gr.Markdown(disclaimer)
                 with gr.Group(elem_id="share-btn-container"):
                     community_icon = gr.HTML(community_icon_html, visible=True)
                     loading_icon = gr.HTML(loading_icon_html, visible=True)
@@ -260,11 +199,10 @@ with gr.Blocks(theme=theme, analytics_enabled=False, css=css) as demo:
                     fn=process_example,
                     outputs=[output],
                 )
-                gr.Markdown(FORMATS)
 
     submit.click(
         generate,
-        inputs=[instruction, temperature, max_new_tokens, top_p, repetition_penalty, version],
+        inputs=[instruction, temperature, max_new_tokens, top_p, repetition_penalty],
         outputs=[output],
     )
     share_button.click(None, [], [], _js=share_js)
