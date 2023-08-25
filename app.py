@@ -82,7 +82,7 @@ def generate(
         if any([end_token in response.token.text for end_token in [EOS_STRING, EOT_STRING]]):
             if fim_mode:
                 output += suffix
-            print("output", output)
+                print("output", output)
             else:
                 return output
         else:
