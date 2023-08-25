@@ -19,6 +19,7 @@ FIM_SUFFIX = "<fim_suffix>"
 
 FIM_INDICATOR = "<FILL_HERE>"
 
+EOS_STRING = "</s>"
 
 theme = gr.themes.Monochrome(
     primary_hue="indigo",
@@ -77,7 +78,7 @@ def generate(
 
     previous_token = ""
     for response in stream:
-        if response.token.text == "<|endoftext|>":
+        if response.token.text == EOS_STRING:
             if fim_mode:
                 output += suffix
             else:
@@ -119,8 +120,7 @@ description = """
     <h1> 🦙 CodeLlama Playground</h1>
 </div>
 <div style="text-align: left;">
-    <p>This is a demo to generate text and code with the following Code Llama model (7B).</p>
-    <p><b>Please note:</b> This model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model.</p>
+    <p>This is a demo to generate text and code with the following Code Llama model (7B). Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model.</p>
 </div>
 """
 
