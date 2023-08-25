@@ -121,7 +121,7 @@ description = """
     <h1> 🦙 CodeLlama Playground</h1>
 </div>
 <div style="text-align: left;">
-    <p>This is a demo to generate text and code with the following Code Llama model (7B). Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model. Infilling is currently not supported.</p>
+    <p>This is a demo to generate text and code with the following Code Llama model (13B). Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model. Infilling is currently not supported.</p>
 </div>
 """
 
