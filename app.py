@@ -120,7 +120,7 @@ description = """
     <h1> 🦙 CodeLlama Playground</h1>
 </div>
 <div style="text-align: left;">
-    <p>This is a demo to generate text and code with the following Code Llama model (7B). Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model.</p>
+    <p>This is a demo to generate text and code with the following Code Llama model (7B). Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model. Infilling is currently not supported.</p>
 </div>
 """
 
@@ -145,7 +145,7 @@ with gr.Blocks(theme=theme, analytics_enabled=False, css=css) as demo:
                                 with column_1:
                                     temperature = gr.Slider(
                                         label="Temperature",
-                                        value=0.2,
+                                        value=0.1,
                                         minimum=0.0,
                                         maximum=1.0,
                                         step=0.05,
@@ -173,7 +173,7 @@ with gr.Blocks(theme=theme, analytics_enabled=False, css=css) as demo:
                                     )
                                     repetition_penalty = gr.Slider(
                                         label="Repetition penalty",
-                                        value=1.2,
+                                        value=1.05,
                                         minimum=1.0,
                                         maximum=2.0,
                                         step=0.05,
@@ -181,12 +181,6 @@ with gr.Blocks(theme=theme, analytics_enabled=False, css=css) as demo:
                                         info="Penalize repeated tokens",
                                     )
                                     
-                with gr.Group(elem_id="share-btn-container"):
-                    community_icon = gr.HTML(community_icon_html, visible=True)
-                    loading_icon = gr.HTML(loading_icon_html, visible=True)
-                    share_button = gr.Button(
-                        "Share to community", elem_id="share-btn", visible=True
-                    )
                 gr.Examples(
                     examples=examples,
                     inputs=[instruction],
@@ -200,5 +194,4 @@ with gr.Blocks(theme=theme, analytics_enabled=False, css=css) as demo:
         inputs=[instruction, temperature, max_new_tokens, top_p, repetition_penalty],
         outputs=[output],
     )
-    share_button.click(None, [], [], _js=share_js)
 demo.queue(concurrency_count=16).launch(debug=True)
