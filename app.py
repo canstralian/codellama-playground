@@ -37,12 +37,7 @@ client = Client(
     API_URL,
     headers={"Authorization": f"Bearer {HF_TOKEN}"},
 )
-client_base = Client(
-    API_URL_BASE, headers={"Authorization": f"Bearer {HF_TOKEN}"},
-)
-client_plus = Client(
-    API_URL_PLUS, headers={"Authorization": f"Bearer {HF_TOKEN}"},
-)
+
 
 def generate(
     prompt, temperature=0.9, max_new_tokens=256, top_p=0.95, repetition_penalty=1.0,
