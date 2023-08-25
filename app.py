@@ -82,6 +82,8 @@ def generate(
         if any([end_token in response.token.text for end_token in [EOS_STRING, EOT_STRING]]):
             if fim_mode:
                 output += suffix
+                yield output
+                return output
                 print("output", output)
             else:
                 return output
