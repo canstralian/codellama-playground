@@ -122,7 +122,7 @@ css += share_btn_css + monospace_css + ".gradio-container {color: black}"
 
 description = """
 <div style="text-align: center;">
-    <h1> 🦙 CodeLlama Playground</h1>
+    <h1> 🦙 Code Llama Playground</h1>
 </div>
 <div style="text-align: left;">
     <p>This is a demo to generate text and code with the following <a href="https://huggingface.co/codellama/CodeLlama-13b-hf">Code Llama model (13B)</a>. Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can visit the <a href="https://huggingface.co/codellama/">Code Llama Org</a> and select an instruct model. Infilling is currently not supported. You can learn more about the model in the <a href="https://huggingface.co/blog/codellama/">blog post<\a> or <a href="https://huggingface.co/papers/2308.12950">paper<\a></p>
