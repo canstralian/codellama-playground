@@ -13,13 +13,14 @@ HF_TOKEN = os.environ.get("HF_TOKEN", None)
 
 API_URL = "https://api-inference.huggingface.co/models/codellama/CodeLlama-7b-hf"
 
-FIM_PREFIX = "<fim_prefix>"
-FIM_MIDDLE = "<fim_middle>"
-FIM_SUFFIX = "<fim_suffix>"
+FIM_PREFIX = "<PRE> "
+FIM_MIDDLE = " <MID>"
+FIM_SUFFIX = "<SUF>"
 
 FIM_INDICATOR = "<FILL_HERE>"
 
 EOS_STRING = "</s>"
+EOT_STRING = "<EOT>"
 
 theme = gr.themes.Monochrome(
     primary_hue="indigo",
@@ -78,7 +79,7 @@ def generate(
 
     previous_token = ""
     for response in stream:
-        if response.token.text == EOS_STRING:
+        if response.token.text in [EOS_STRING, EOT_STRING]:
             if fim_mode:
                 output += suffix
             else:
