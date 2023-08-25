@@ -97,7 +97,7 @@ examples = [
     "// Returns every other value in the array as a new array.\nfunction everyOther(arr) {",
     "Poor English: She no went to the market. Corrected English:",
     "def alternating(list1, list2):\n   results = []\n   for i in range(min(len(list1), len(list2))):\n       results.append(list1[i])\n       results.append(list2[i])\n   if len(list1) > len(list2):\n       <FILL_HERE>\n   else:\n       results.extend(list2[i+1:])\n   return results",
-    "def remove_non_ascii(s: str) -> str:\n    \"\"\" <FILL_ME>\nprint(remove_non_ascii("afkdj$$("))",
+    "def remove_non_ascii(s: str) -> str:\n    \"\"\" <FILL_ME>\nprint(remove_non_ascii('afkdj$$('))",
 ]
 
 
