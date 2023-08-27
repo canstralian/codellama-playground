@@ -13,7 +13,7 @@ HF_TOKEN = os.environ.get("HF_TOKEN", None)
 
 API_URL = "https://api-inference.huggingface.co/models/codellama/CodeLlama-13b-hf"
 
-FIM_PREFIX = "<PRE> "
+FIM_PREFIX = "<PRE>"
 FIM_MIDDLE = " <MID>"
 FIM_SUFFIX = " <SUF>"
 
