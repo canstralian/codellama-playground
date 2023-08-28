@@ -125,7 +125,7 @@ description = """
     <h1> 🦙 Code Llama Playground</h1>
 </div>
 <div style="text-align: left;">
-    <p>This is a demo to generate text and code with the following <a href="https://huggingface.co/codellama/CodeLlama-13b-hf">Code Llama model (13B)</a>. Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can use [this demo instead](https://huggingface.co/spaces/codellama/codellama-13b-chat). You can learn more about the model in the <a href="https://huggingface.co/blog/codellama/">blog post<\a> or <a href="https://huggingface.co/papers/2308.12950">paper<\a></p>
+    <p>This is a demo to generate text and code with the following <a href="https://huggingface.co/codellama/CodeLlama-13b-hf">Code Llama model (13B)</a>. Please note that this model is not designed for instruction purposes but for code completion. If you're looking for instruction or want to chat with a fine-tuned model, you can use <a href="https://huggingface.co/spaces/codellama/codellama-13b-chat">this demo instead</a>. You can learn more about the model in the <a href="https://huggingface.co/blog/codellama/">blog post<\a> or <a href="https://huggingface.co/papers/2308.12950">paper<\a></p>
 </div>
 """
 
