@@ -66,7 +66,7 @@ def generate(
             prefix, suffix = prompt.split(FIM_INDICATOR)
         except:
             raise ValueError(f"Only one {FIM_INDICATOR} allowed in prompt!")
-        prompt = f"{FIM_PREFIX}{prefix}{FIM_SUFFIX}{suffix}{FIM_MIDDLE}"
+        # prompt = f"{FIM_PREFIX}{prefix}{FIM_SUFFIX}{suffix}{FIM_MIDDLE}"
 
     
     stream = client.generate_stream(prompt, **generate_kwargs)
