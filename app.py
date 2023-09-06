@@ -11,7 +11,7 @@ from share_btn import community_icon_html, loading_icon_html, share_js, share_bt
 
 HF_TOKEN = os.environ.get("HF_TOKEN", None)
 
-API_URL = "https://api-inference.huggingface.co/models/codellama/CodeLlama-13b-hf"
+# API_URL = "https://api-inference.huggingface.co/models/codellama/CodeLlama-13b-hf"
 
 FIM_PREFIX = "<PRE> "
 FIM_MIDDLE = " <MID>"
