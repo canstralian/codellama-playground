@@ -1,2 +1,2 @@
 huggingface_hub
-text-generation==0.4.1
+text-generation==0.7.0
